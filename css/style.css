@@ -1,101 +1,199 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,500;1,900&display=swap');
-*{
-    font-family: 'Poppins',cursive;
+@import url('https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Quicksand:wght@500;600;700&display=swap');
+
+:root {
+    --ink-plum: #2b1130;
+    --ink-plum-deep: #180a1e;
+    --magenta-bloom: #ff4fa3;
+    --peach-bloom: #ffb37a;
+    --butter-bloom: #ffe37a;
+    --sky-bloom: #8ad7ff;
+    --cream-petal: #fff6ef;
 }
-body{
-    color: azure;
-    width: 100%;
-    height: 100vh;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: black;
+    gap: 1.75rem;
+    padding: 2rem 1.25rem;
     overflow: hidden;
-}
-.greetings{
-    font-size: 6rem;
-    font-weight: 900;
-}
-.greetings > span{
-    animation: glow 2.5s ease-in-out infinite;
-}
-@keyframes glow{
-    0%, 100%{
-        color: #fff;
-        text-shadow: 0 0 12px #fbff00, 0 0 50px #fbff00, 0 0 100px #fbff00;
-    }
-    10%, 90%{
-        color: #696565;
-        text-shadow: none;
-    }
-}
-.greetings > span:nth-child(2){
-    animation-delay: .2s ;
-}
-.greetings > span:nth-child(3){
-    animation-delay: .4s ;
-}
-.greetings > span:nth-child(4){
-    animation-delay: .6s;
-}
-.greetings > span:nth-child(5){
-    animation-delay: .8s;
+    font-family: 'Quicksand', sans-serif;
+    background:
+        radial-gradient(circle at 20% 15%, rgba(255, 179, 122, 0.18), transparent 45%),
+        radial-gradient(circle at 85% 80%, rgba(138, 215, 255, 0.14), transparent 40%),
+        linear-gradient(160deg, rgba(24, 10, 30, 0.88), rgba(43, 17, 48, 0.82) 60%, rgba(58, 20, 64, 0.85)),
+        url('../img/flowers.png');
+    background-size: cover, cover, cover, cover;
+    background-position: center, center, center, center;
+    background-repeat: no-repeat;
+    background-attachment: fixed, fixed, fixed, fixed;
 }
 
-.description{
-    font-size: 1.5rem;
-    margin-bottom: 20px;
+/* ---------- SLAY headline ---------- */
+
+.greetings:first-of-type {
+    display: flex;
+    gap: clamp(0.4rem, 2vw, 1rem);
 }
 
-.button a{
+.greetings:first-of-type span {
+    font-family: 'Bagel Fat One', cursive;
+    font-size: clamp(3rem, 12vw, 6.5rem);
+    line-height: 1;
+    background: linear-gradient(180deg, var(--butter-bloom), var(--peach-bloom) 55%, var(--magenta-bloom));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    filter: drop-shadow(0 6px 18px rgba(255, 79, 163, 0.35));
+    opacity: 0;
+    transform: scale(0) rotate(-12deg);
+    animation: bloomPop 0.7s cubic-bezier(.34, 1.56, .64, 1) forwards;
+}
+
+.greetings:first-of-type span:nth-child(1) { animation-delay: 0.05s; }
+.greetings:first-of-type span:nth-child(2) { animation-delay: 0.2s; }
+.greetings:first-of-type span:nth-child(3) { animation-delay: 0.35s; }
+.greetings:first-of-type span:nth-child(4) { animation-delay: 0.5s; }
+
+.greetings:first-of-type span:hover {
+    animation: none;
+    transform: scale(1.12) rotate(-4deg);
+    transition: transform 0.25s ease;
+    cursor: default;
+}
+
+@keyframes bloomPop {
+    0% { opacity: 0; transform: scale(0) rotate(-12deg); }
+    65% { opacity: 1; transform: scale(1.15) rotate(4deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+
+/* ---------- Flower bed row ---------- */
+
+.flower-row {
+    display: flex;
+    gap: clamp(0.5rem, 3vw, 1.4rem);
+}
+
+.flower-row span {
+    display: inline-block;
+    font-size: clamp(1.8rem, 5vw, 2.6rem);
+    line-height: 1;
+    transform-origin: bottom center;
+    opacity: 0;
+    transform: scaleY(0);
+    animation:
+        growStem 0.6s ease-out forwards,
+        sway 3.4s ease-in-out infinite;
+    animation-delay: 0.9s, 1.6s;
+}
+
+.flower-row span::before { content: '🌸'; }
+.flower-row span:nth-child(2)::before { content: '🌷'; }
+.flower-row span:nth-child(3)::before { content: '🌺'; }
+.flower-row span:nth-child(4)::before { content: '🌼'; }
+.flower-row span:nth-child(5)::before { content: '🌻'; }
+.flower-row span:nth-child(6)::before { content: '🌹'; }
+
+.flower-row span:nth-child(1) { animation-delay: 0.9s, 1.6s; }
+.flower-row span:nth-child(2) { animation-delay: 1.0s, 1.8s; }
+.flower-row span:nth-child(3) { animation-delay: 1.1s, 1.7s; }
+.flower-row span:nth-child(4) { animation-delay: 1.2s, 2.0s; }
+.flower-row span:nth-child(5) { animation-delay: 1.3s, 1.9s; }
+.flower-row span:nth-child(6) { animation-delay: 1.4s, 2.1s; }
+
+@keyframes growStem {
+    0% { opacity: 0; transform: scaleY(0); }
+    70% { opacity: 1; transform: scaleY(1.15); }
+    100% { opacity: 1; transform: scaleY(1); }
+}
+
+@keyframes sway {
+    0%, 100% { transform: rotate(-6deg); }
+    50% { transform: rotate(6deg); }
+}
+
+/* ---------- Description ---------- */
+
+.description {
+    max-width: 26rem;
+    text-align: center;
+    opacity: 0;
+    animation: fadeRise 0.8s ease-out forwards;
+    animation-delay: 1.9s;
+}
+
+.description span {
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    font-weight: 600;
+    color: var(--cream-petal);
+    letter-spacing: 0.02em;
+}
+
+@keyframes fadeRise {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ---------- Button ---------- */
+
+.button {
+    opacity: 0;
+    animation: fadeRise 0.8s ease-out forwards;
+    animation-delay: 2.2s;
+}
+
+.button a {
+    display: inline-block;
+    padding: 0.85rem 2.4rem;
+    border-radius: 999px;
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 700;
+    font-size: 1.05rem;
     text-decoration: none;
-    font-size: 1rem;
-    color: #111;
+    color: var(--ink-plum-deep);
+    background: linear-gradient(120deg, var(--butter-bloom), var(--peach-bloom), var(--magenta-bloom));
+    background-size: 200% 200%;
+    box-shadow: 0 10px 28px rgba(255, 79, 163, 0.35);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background-position 0.4s ease;
 }
 
-@media screen and (max-width:574px){
-    .greetings{
-        display: block;
-        font-size: 3rem;
-        font-weight: 500;
-        text-align: center;
-    }
-    .description{
-        font-size: 1rem;
-    }
-    
-    .button a{
-        font-size: .5rem;
-    }
+.button a:hover,
+.button a:focus-visible {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow: 0 14px 34px rgba(255, 79, 163, 0.5);
+    background-position: 100% 50%;
 }
 
-.description{
-    color: #fbff00;
+.button a:focus-visible {
+    outline: 3px solid var(--sky-bloom);
+    outline-offset: 3px;
 }
 
-/* Estilo para el botón */
-.button button {
-    background-color: yellow; /* Fondo amarillo */
-    border: none; /* Sin bordes */
-    padding: 10px 20px; /* Ajusta el relleno según tu preferencia */
-    font-size: 18px; /* Tamaño de fuente */
-    cursor: pointer;
-    position: relative; /* Necesario para el resplandor */
-    border-radius: 20px; /* Esquinas redondeadas */
-    transition: background-color 0.3s ease-in-out; /* Transición suave para el color de fondo */
-  }
-  
-  /* Estilo para el enlace dentro del botón */
-  .button button a {
-    text-decoration: none; /* Elimina el subrayado del enlace */
-    color: inherit; /* Hereda el color del texto del botón */
-  }
-  
-  /* Efecto de resplandor al pasar el cursor sobre el botón */
-  .button button:hover {
-    background-color: orange; /* Cambia el color de fondo al pasar el mouse a naranja */
-    box-shadow: 0 0 10px yellow, 0 0 20px yellow, 0 0 30px yellow; /* Efecto de resplandor amarillo */
-  }
-  
-  
+/* ---------- Responsive ---------- */
+
+@media (max-width: 420px) {
+    body { gap: 1.25rem; }
+    .flower-row { gap: 0.5rem; }
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+    .greetings:first-of-type span,
+    .flower-row span,
+    .description,
+    .button {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
